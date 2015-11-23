@@ -1,0 +1,40 @@
+/** Style for button */
+.btn {
+    margin:0 auto; 
+    margin-bottom:20px; 
+    margin-left:auto;
+    width: 40%; 
+    padding: 10px; 
+    display:block; 
+    text-align:center;
+    border-radius: 10px;
+    font-family: Monospace;
+    color: #ffffff;
+    font-size: 30px;
+    background: #3498db;
+    padding: 0px 30px 0px 30px;
+    border: solid #1f628d 5px;
+    cursor: pointer;
+}
+
+/** Style for button when hover*/
+.btn:hover {
+  background: #fd3c50;
+  background-image: -webkit-linear-gradient(top, #fd3c50, #245270);
+  background-image: -moz-linear-gradient(top, #fd3c50, #245270);
+  background-image: -ms-linear-gradient(top, #fd3c50, #245270);
+  background-image: -o-linear-gradient(top, #fd3c50, #245270);
+  background-image: linear-gradient(to bottom, #fd3c50, #245270);
+  text-decoration: none;
+  background-position: 0 0;
+}
+
+/** Style for button when active*/
+btn.active{
+    background-position: 0 0;
+}
+
+/** Style for button with class firstBtn */
+.firstBtn{
+  margin-top:40px;
+}

@@ -1,0 +1,31 @@
+[29-Oct-2015 16:40:59 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/ubuntu/workspace/db/DBCommunication.php on line 189
+[29-Oct-2015 16:40:59 UTC] PHP Stack trace:
+[29-Oct-2015 16:40:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/getPlayerById.php:0
+[29-Oct-2015 16:40:59 UTC] PHP   2. DbComunication->getPlayerbyId() /home/ubuntu/workspace/ajax/getPlayerById.php:9
+[29-Oct-2015 16:46:21 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/ubuntu/workspace/db/DBCommunication.php on line 189
+[29-Oct-2015 16:46:21 UTC] PHP Stack trace:
+[29-Oct-2015 16:46:21 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/getPlayerById.php:0
+[29-Oct-2015 16:46:21 UTC] PHP   2. DbComunication->getPlayerbyId() /home/ubuntu/workspace/ajax/getPlayerById.php:9
+[29-Oct-2015 16:46:28 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/ubuntu/workspace/db/DBCommunication.php on line 189
+[29-Oct-2015 16:46:28 UTC] PHP Stack trace:
+[29-Oct-2015 16:46:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/getPlayerById.php:0
+[29-Oct-2015 16:46:28 UTC] PHP   2. DbComunication->getPlayerbyId() /home/ubuntu/workspace/ajax/getPlayerById.php:9
+[29-Oct-2015 16:46:37 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/ubuntu/workspace/db/DBCommunication.php on line 189
+[29-Oct-2015 16:46:37 UTC] PHP Stack trace:
+[29-Oct-2015 16:46:37 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/getPlayerById.php:0
+[29-Oct-2015 16:46:37 UTC] PHP   2. DbComunication->getPlayerbyId() /home/ubuntu/workspace/ajax/getPlayerById.php:9
+[29-Oct-2015 17:27:42 UTC] PHP Fatal error:  Call to undefined method DbComunication::changePlayNowTo() in /home/ubuntu/workspace/ajax/changePlayNow.php on line 14
+[29-Oct-2015 17:27:42 UTC] PHP Stack trace:
+[29-Oct-2015 17:27:42 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/changePlayNow.php:0
+[29-Oct-2015 17:29:39 UTC] PHP Fatal error:  Call to undefined method DbComunication::changePlayNowTo() in /home/ubuntu/workspace/ajax/changePlayNow.php on line 14
+[29-Oct-2015 17:29:39 UTC] PHP Stack trace:
+[29-Oct-2015 17:29:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/changePlayNow.php:0
+[29-Oct-2015 17:31:00 UTC] PHP Fatal error:  Call to undefined method DbComunication::changePlayNowTo() in /home/ubuntu/workspace/ajax/changePlayNow.php on line 14
+[29-Oct-2015 17:31:00 UTC] PHP Stack trace:
+[29-Oct-2015 17:31:00 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/changePlayNow.php:0
+[29-Oct-2015 17:36:48 UTC] PHP Fatal error:  Call to undefined method DbComunication::changePlayNowTo() in /home/ubuntu/workspace/ajax/changePlayNow.php on line 14
+[29-Oct-2015 17:36:48 UTC] PHP Stack trace:
+[29-Oct-2015 17:36:48 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/changePlayNow.php:0
+[29-Oct-2015 17:39:54 UTC] PHP Fatal error:  Call to undefined function changePlayNowTo() in /home/ubuntu/workspace/ajax/changePlayNow.php on line 22
+[29-Oct-2015 17:39:54 UTC] PHP Stack trace:
+[29-Oct-2015 17:39:54 UTC] PHP   1. {main}() /home/ubuntu/workspace/ajax/changePlayNow.php:0
