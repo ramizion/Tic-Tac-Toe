@@ -45,7 +45,7 @@ $(document).ready( function() {
 	// Set ActionListener to click on  "play vs. computer"
 	$("#btnAgainsCom").click(function(){
 		
-		if(!checkIfPlayerIsPlaying()) { // If the player isn't playing now
+		if(!checkIfPlayerIsPlaying()  || !isOnlineGame) { // If the player isn't playing now
 			
 			changePlayNow(conectedUser.id,1); // Set PlayNot as "1"- ture
 			isOnlineGame=false;
@@ -539,7 +539,8 @@ function computerTurn(){
 	
 	setTimeout(function(){
 		
-		var cellIndex = nextCellForComputer();  			// Get the cell from the algorithm
+		var cellIndex = nextCellForComputer(getMax);  			// Get the cell from the algorithm
+		
 		var newMove = new Move(opponentPlayer,cellIndex);
 		addNewMoveToTable(newMove);							// Save the move
 		movesArray[movesArray.length]=newMove;
@@ -1587,100 +1588,123 @@ function addOrUpdateGame(id,gameId){
 	});
 }
 
-/**  Simple algorithm for select a cell to mark in computer turn */
-function nextCellForComputer(){
-	
-	if(!isFirstPlayer){
-		if(movesArray.length<1){
-			return 4; // Central Board Game
-		}
-		else if(movesArray.length==2){
-			
-			for(i=0;i<9;i=i+2){
-				if(i!=4 && !isCellMarked(i,null)){
-					return i;
-				}
-			}
-		}
-		else if(movesArray.length==4){
-			if(isCellMarked(0,0) && !isCellMarked(2,null)){
-				return 2;
-			}
-			else if(isCellMarked(2,0) && !isCellMarked(8,null)){
-				return 8;
-			}
-			else if(isCellMarked(6,0) && !isCellMarked(0,null)){
-				return 0;
-			}
-			else if(isCellMarked(8,0) && !isCellMarked(6,null)){
-				return 6;
-			}
-			else{
-				if(isCellMarked(0,1) && isCellMarked(6,1)&& !isCellMarked(3,null)){
-					return 3;
-				}
-			}
-		}
-	}
-	
-	for(var i=0; i<2;i++){
-		if(isCellMarked(0,i) && isCellMarked(3,i) && !isCellMarked(6,null)){
-			return 6;
-		}
-		else if(isCellMarked(3,i) && isCellMarked(6,i) && !isCellMarked(0,null)){
-			return 0;
-		}
-		else if(isCellMarked(0,i) && isCellMarked(6,i) && !isCellMarked(3,null)){
-			return 3;
-		}
-		else if(isCellMarked(1,i) && isCellMarked(4,i) && !isCellMarked(7,null)){
-			return 7;
-		}
-		else if(isCellMarked(4,i) && isCellMarked(7,i) && !isCellMarked(1,null)){
-			return 1;
-		}
-		else if(isCellMarked(7,i) && isCellMarked(1,i) && !isCellMarked(4,null)){
-			return 4;
-		}
-		else if(isCellMarked(2,i) && isCellMarked(5,i) && !isCellMarked(8,null)){
-			return 8;
-		}
-		else if(isCellMarked(5,i) && isCellMarked(8,i) && !isCellMarked(2,null)){
-			return 2;
-		}
-		else if(isCellMarked(8,i) && isCellMarked(2,i) && !isCellMarked(5,null)){
-			return 5;
-		}
-		else if(isCellMarked(0,i) && isCellMarked(4,i) && !isCellMarked(8,null)){
-			return 8;
-		}
-		else if(isCellMarked(4,i) && isCellMarked(8,i) && !isCellMarked(0,null)){
-			return 0;
-		}
-		else if(isCellMarked(8,i) && isCellMarked(0,i) && !isCellMarked(4,null)){
-			return 4;
-		}
-		else if(isCellMarked(2,i) && isCellMarked(4,i) && !isCellMarked(6,null)){
-			return 6;
-		}
-		else if(isCellMarked(6,i) && isCellMarked(2,i) && !isCellMarked(4,null)){
-			return 4;
-		}
-		else if(isCellMarked(4,i) && isCellMarked(6,i) && !isCellMarked(2,null)){
-			return 2;
-		}
-	}
 
-	for(i=0;i<9;i++){
+/**  Simple algorithm for select a cell to mark in computer turn */
+function nextCellForComputer(callBack){
+	
+	var associativeArray = {};
+	for(var i=0; i<9;i++){
 		if(!isCellMarked(i,null)){
-			return i;
+			associativeArray[i]=getScore(i);
+			// alert(i+" " +associativeArray[i]);
+		}
+	}
+	// alert(callBack(associativeArray));
+	return callBack(associativeArray);
+}
+
+function getMax(associativeArray){
+	var max=null;
+	for(var x in associativeArray){
+		if(max<associativeArray[x] || max==null){
+			max=associativeArray[x];
+		}
+	}
+	for(var y in associativeArray){
+		if(max==associativeArray[y]){
+			return y;	
 		}
 	}
 }
 
+function getScore(newPosiont){
+	
+	var array=[];
 
+	for(var i=0;i<9;i++){
+		if(i==newPosiont){
+			array[i]=1;
+			continue;
+		}
+		if(isCellMarked(i,opponentPlayer)){
+			array[i]=1;
+		}
+		else if(isCellMarked(i,null)){
+			array[i]=-1;
+		}
+		else
+			array[i]=0; 
+	}
+	var positionts=[];
+	var sum=0;
+	for(i=0;i<9;i++){
+		if(i==0){
+			positionts=[0,1,2];
+			sum=getScoreOfRow(array,positionts);
+		}
+		else if(i==1){
+			positionts=[3,4,5];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==2){
+			positionts=[6,7,8];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==3){
+			positionts=[0,3,6];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==4){
+			positionts=[1,4,7];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==5){
+			positionts=[2,5,8];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==6){
+			positionts=[0,4,8];
+			sum+=getScoreOfRow(array,positionts);
+		}
+		else if(i==7){
+			positionts=[2,4,6];
+			sum+=getScoreOfRow(array,positionts);
+		}
+	}
+	// alert(sum);
+	return sum;
+}
 
-
-
-
-
+function getScoreOfRow(array, positions){
+	
+	var sum=array[positions[0]]+array[positions[1]]+array[positions[2]];
+	if(sum==3){
+		return 1000;
+	}
+	else if(sum==2){
+		return 100;
+	}
+	else if(sum==-3){
+		return -1000;
+	}
+	else if(sum==-2){
+		return -100;
+	}
+	else if(sum==0){
+		return 0;
+	}
+	else if(sum==-1){
+		if(array[positions[0]]!=0 && array[positions[1]]!=0  && array[positions[0]]!=0){
+				return 1;
+			}
+		else
+			return -10;
+	}
+	else if(sum==1){
+		if(array[positions[0]]!=0 && array[positions[1]]!=0  && array[positions[0]]!=0){
+				return -1;
+			}
+		else
+			return 10;
+	}
+}
